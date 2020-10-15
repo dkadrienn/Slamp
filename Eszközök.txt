@@ -1,4 +1,0 @@
-Uno R3 cu Wifi ESP8266
-Banda LED adresabila, RGB, WS2812
-AMS1117-ADJ
-Modul bluetooth HC-06
