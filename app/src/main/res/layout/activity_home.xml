@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <androidx.constraintlayout.widget.ConstraintLayout -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="50dp"
+    tools:context=".HomeActivity">
+
+   <androidx.appcompat.widget.SwitchCompat
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/mySwitch"
+       android:textOff="Off"
+       android:textOn="On"
+       android:gravity="center"
+       android:layout_marginTop = "40dp"
+       android:thumb="@drawable/sw_thumb"
+       app:track="@drawable/sw_track"
+       app:showText="true"/>
+
+   <ImageView
+       android:layout_width="match_parent"
+       android:layout_height="fill_parent"
+       android:id="@+id/myimageView"
+       android:layout_marginTop="200dp"
+       />
+
+</LinearLayout>
+<!-- </androidx.constraintlayout.widget.ConstraintLayout> -->
