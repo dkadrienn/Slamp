@@ -34,22 +34,22 @@ class Game
     }
     //Dice
     void dice() {
-      Serial.println("DICE");
+      Serial.println("DICE");BTserial.print("DICE"); BTserial.print(";");
       int numberOfPlayers = -1;
       int actFigure = 0;
       char numberOfPlayersChar = 0x00;
-      Serial.print("Jatekosok szama: ");
+      Serial.print("Jatekosok szama: "); BTserial.print("Jatekosok szama: "); BTserial.print(";");
       if  (block == 1) { // A jatekosok szamanak beolvasasa
         while (numberOfPlayers < 0) {
           delay(100);
-          numberOfPlayersChar = Serial.read();
+          numberOfPlayersChar = BTserial.read();
           numberOfPlayers = numberOfPlayersChar - '0';
         }
 
-        Serial.println(numberOfPlayers);
+        Serial.println(numberOfPlayers); BTserial.print(numberOfPlayers); BTserial.print(";");
         block --;
       }
-      while (Game_Rdata = Serial.read()) {
+      while (Game_Rdata = BTserial.read()) {
         if (Game_Rdata == '1') { //Egyest olvasva dob a kovetkezo jatekos
           throwing(actFigure);
           if ( actFigure == numberOfPlayers - 1 ) {
@@ -71,8 +71,8 @@ class Game
           }
         }
         else if (Game_Rdata == '0') { //Kimarad egy korbol ha zeros-t olvas
-          Serial.print(actFigure + 1);
-          Serial.println(". kimarad");
+          Serial.print(actFigure + 1); BTserial.print(actFigure+1); BTserial.print(";");
+          Serial.println(". kimarad"); BTserial.print(". kimarad"); BTserial.print(";");
           if ( actFigure == numberOfPlayers - 1 ) {
             actFigure = 0;
           }
@@ -81,7 +81,7 @@ class Game
           }
         }
         else if (Game_Rdata == '2') {
-          Serial.println("KILEPES");
+          Serial.println("KILEPES"); BTserial.print("KILEPES"); BTserial.print(";");
           block ++;
           return;
         }
@@ -91,9 +91,9 @@ class Game
 
     void throwing(int actFigure) {
       int diceValue = random(1, 7);
-      Serial.print(actFigure + 1);
-      Serial.print(". figura dobasa: ");
-      Serial.println(diceValue);
+      Serial.print(actFigure + 1); BTserial.print(actFigure+1);
+      Serial.print(". figura dobasa: "); BTserial.print(". figura dobasa: ");
+      Serial.println(diceValue); BTserial.print(diceValue); BTserial.print(";");
       for ( int flashNr = 0; flashNr < diceValue; flashNr ++) {
         for (int actLed = 0; actLed < NUM_LEDS; actLed++) {
           strip.setPixelColor(actLed, strip.Color(figures[actFigure].red,
@@ -113,15 +113,15 @@ class Game
 
     //Timer effect
     void timer() {
-      Serial.println("TIMER");
+      Serial.println("TIMER"); BTserial.print("TIMER"); BTserial.print(";");
       int timer_time;
       while (1) {
         for (int i = 0; i < NUM_LEDS; i++) {
           strip.setPixelColor(i, strip.Color(0, 0, 0));
           strip.show();
         }
-        Serial.print("Hany sec: ");
-        timer_time = Serial.parseInt();
+        Serial.print("Hany sec: ");BTserial.print("Hany sec: "); BTserial.print(";");
+        timer_time = BTserial.parseInt();
         if (timer_time > 0) {
           Serial.println(timer_time);
           timer_fill(timer_time);
@@ -139,7 +139,7 @@ class Game
       float delayVal = (double)timeSec / ((double)NUM_LEDS);
       //Serial.println(delayVal);
       for (int actled = 0; actled < NUM_LEDS ; actled++) {
-        Serial.println("HOPP");
+        Serial.println("HOPP"); BTserial.print("HOPP"); BTserial.print(";");
         if ( 255 - (actled * 10) < 0 ) {
           strip.setPixelColor(actled, strip.Color( 255, 0, 0));
         }
@@ -156,7 +156,7 @@ class Game
       // Kikapcsol
       int howmanytimes = 3;
       while (howmanytimes > 0) {
-        Serial.println("BLINK");
+        Serial.println("BLINK"); BTserial.print("BLINK"); BTserial.print(";");
         for ( int i = 0; i < NUM_LEDS; i++) {
           strip.setPixelColor(i, strip.Color(255, 0, 0));
           strip.show();

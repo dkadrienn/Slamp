@@ -6,6 +6,9 @@
 //                       !!! Az r,g,b, brighness komponenseknek nem tudunk 0-s erteket adni !!!
 
 #include <Adafruit_NeoPixel.h>
+#include <SoftwareSerial.h>
+
+SoftwareSerial BTserial(10, 11); // RX | TX
 
 class Effects
 {
@@ -30,7 +33,7 @@ class Effects
     //Disco effect
     void disco() {
       while ( 1 ) {
-        Serial.println("DISCOOO");
+        Serial.println("DISCOOO"); BTserial.print("DISCOOO"); BTserial.print(";");
         for (int i = 0; i < 7; i++) {
           disco_setColor();
           for ( int actLed = 0; actLed < NUM_LEDS; actLed ++) {
@@ -38,7 +41,7 @@ class Effects
             strip.setPixelColor(actLed, strip.Color(red, green, blue));
             strip.show();
           }
-          RdataE = Serial.read();
+          RdataE = BTserial.read();
           if ( RdataE == '0' ) {
             strip.clear();
             return;
@@ -51,7 +54,7 @@ class Effects
       if (actPos >= 7) {
         actPos = 0;
       }
-      Serial.println(actPos);
+      //Serial.println(actPos); BTserial.print(actPos); BTserial.print(";");
       red = 255 * colorArray[actPos][0];
       green = 255 * colorArray[actPos][1];
       blue = 255 * colorArray[actPos][2];
@@ -78,7 +81,7 @@ class Effects
         }
         delay(500);
       }
-      RdataE = Serial.read();
+      RdataE = BTserial.read();
       if ( RdataE == '0' ) {
         strip.clear();
         exitStatus = 1;
@@ -132,7 +135,7 @@ class Effects
         }
       }
       strip.setBrightness(100);
-      RdataE = Serial.read();
+      RdataE = BTserial.read();
       if ( RdataE == '0' ) {
         strip.clear();
         exitStatus = 1;
@@ -184,7 +187,7 @@ class Effects
         }
       }
       if (exitStatus == 1) return ;
-      RdataE = Serial.read();
+      RdataE = BTserial.read();
       if ( RdataE == '0' ) {
         strip.clear();
         exitStatus = 1;
@@ -237,7 +240,7 @@ class Effects
           }
         }
         delay(100);
-        RdataE = Serial.read();
+        RdataE = BTserial.read();
         if ( RdataE == '0' ) {
           strip.clear();
           exitStatus = 1;
@@ -249,13 +252,13 @@ class Effects
     void christmas() {
       exitStatus = 0;
       while (1) {
-        Serial.println("XMASSS");
+        Serial.println("XMASSS"); BTserial.print("XMASSS"); BTserial.print(";");
         //Serial.println(NUM_LEDS);
         for (int effectNr = 0; effectNr < 20; effectNr ++) whiteRedGreen();
         for (int effectNr = 0; effectNr < 2; effectNr ++) brightnessRGW();
         for (int effectNr = 0; effectNr < 2; effectNr ++) breathing();
         for (int effectNr = 0; effectNr < 10; effectNr ++) fullRGW();
-        RdataE = Serial.read();
+        RdataE = BTserial.read();
         if ( RdataE == '0' || exitStatus == 1) {
           strip.clear();
           return;
@@ -266,7 +269,7 @@ class Effects
     //Raindrop effect
     void raindrop() {
       while (1) {
-        Serial.println("RAINDROP");
+        Serial.println("RAINDROP"); BTserial.print("RAINDROP"); BTserial.print(";");
         int temp_NUM_LED = NUM_LEDS;
         int stayColor = 5;
         while ( temp_NUM_LED > 0) {
@@ -274,7 +277,7 @@ class Effects
             //a csepp folyamata
             strip.setPixelColor(actLed, strip.Color(0, 0, 5));
             strip.show();
-            RdataE = Serial.read();
+            RdataE = BTserial.read();
             if ( RdataE == '0') {
               strip.clear();
               return;
@@ -331,11 +334,11 @@ class Effects
     void fireplace() {
       exitStatus = 0;
       while (1) {
-        Serial.println("FIREEEEE");
+        Serial.println("FIREEEEE"); BTserial.print("fireeeee"); BTserial.print(";");
         green = 10;
         for ( int effectNr = 0; effectNr < 20;  effectNr ++) randLed();
         for ( int effectNr = 0; effectNr < 20;  effectNr ++) cyclic();
-        RdataE = Serial.read();
+        RdataE = BTserial.read();
         if ( RdataE == '0' || exitStatus == 1) {
           return;
         }
@@ -349,7 +352,7 @@ class Effects
         strip.setPixelColor(random(0, strip.numPixels()), strip.Color(255, random(0, 40), 0));
         strip.show();
       }
-      RdataE = Serial.read();
+      RdataE = BTserial.read();
       if ( RdataE == '0') {
         strip.clear();
         exitStatus = 1;
@@ -375,7 +378,7 @@ class Effects
         strip.show();
         delay(50);
       }
-      RdataE = Serial.read();
+      RdataE = BTserial.read();
       if ( RdataE == '0') {
         strip.clear();
         exitStatus = 1;
@@ -387,7 +390,7 @@ class Effects
     //Romantic effect
     void romantic() {
       while (1) {
-        Serial.println("ROMANTIC");
+        Serial.println("ROMANTIC"); BTserial.print("ROMANTIC"); BTserial.print(";");
         red = 255; green = 30; blue = 2;
         if (blue <= 50 && blue >= 0) {
           blue += direction * 5;
@@ -401,7 +404,7 @@ class Effects
             strip.setPixelColor(actLed, strip.Color(red, 0, blue));
             strip.setBrightness(bright);
             strip.show();
-            RdataE = Serial.read();
+            RdataE = BTserial.read();
             if ( RdataE == '0') {
               strip.setBrightness(255);
               strip.clear();
@@ -415,7 +418,7 @@ class Effects
             strip.setPixelColor(actLed, strip.Color(red, 0, blue));
             strip.setBrightness(bright);
             strip.show();
-            RdataE = Serial.read();
+            RdataE = BTserial.read();
             if ( RdataE == '0') {
               strip.setBrightness(255);
               strip.clear();
@@ -430,7 +433,7 @@ class Effects
     //Rainbow effect
     void rainbow() {
       while (1) {
-        Serial.println("RAINBOW");
+        Serial.println("RAINBOW"); BTserial.print("RAINBOW"); BTserial.print(";");
         //Cyclenum-szor fut végig
         // 65536 szin talalhato a színskálán
         for (int firstLedHue = 0; firstLedHue < 65536; firstLedHue += 256) {
@@ -440,7 +443,7 @@ class Effects
           }
           strip.show();
           delay(10);
-          RdataE = Serial.read();
+          RdataE = BTserial.read();
           if ( RdataE == '0') {
             strip.clear();
             return;
@@ -452,7 +455,7 @@ class Effects
     //Hourglass effect
     void hourglass() {
       while (1) {
-        Serial.println("HOURGLASS");
+        Serial.println("HOURGLASS"); BTserial.print("HOURGLASS"); BTserial.print(";");
         int temp_NUM_LED = NUM_LEDS;
         int stayColor = 252;
         while ( temp_NUM_LED > 0) {
@@ -460,7 +463,7 @@ class Effects
             //a homokszem folyamata
             strip.setPixelColor(actLed, strip.Color(252, 252, 3));
             strip.show();
-            RdataE = Serial.read();
+            RdataE = BTserial.read();
             if ( RdataE == '0') {
               strip.clear();
               return;
@@ -491,7 +494,7 @@ class Effects
     //Smooth white effect
     void smoothwhite() {
       while (1) {
-        Serial.println("SMOOTH_WHITE");
+        Serial.println("SMOOTH_WHITE"); BTserial.print("SMOOTH_WHITE"); BTserial.print(";");
         for ( int actBrightness = 0; actBrightness < 256; actBrightness += 2) {
           for ( int actLed = 0; actLed < NUM_LEDS; actLed++)
           {
@@ -499,7 +502,7 @@ class Effects
             strip.setBrightness(actBrightness);
             strip.show();
           }
-          RdataE = Serial.read();
+          RdataE = BTserial.read();
           if ( RdataE == '0') {
             strip.clear();
             strip.setBrightness(255);
@@ -512,7 +515,7 @@ class Effects
             strip.setBrightness(actBrightness);
             strip.show();
           }
-          RdataE = Serial.read();
+          RdataE = BTserial.read();
           if ( RdataE == '0') {
             strip.setBrightness(255);
             return;
@@ -524,7 +527,7 @@ class Effects
     //Smooth random fade
     void smooth_randomfade() {
       while (1) {
-        Serial.println("SMOOTH_RANDOM");
+        Serial.println("SMOOTH_RANDOM"); BTserial.print("SMOOTH_RANDOM"); BTserial.print(";");
         setColor();
         for ( int actBrightness = 0; actBrightness <= 255; actBrightness += 2) {
           for ( int actLed = 0; actLed < NUM_LEDS; actLed++) {
@@ -532,7 +535,7 @@ class Effects
             strip.setBrightness(actBrightness);
             strip.show();
           }
-          RdataE = Serial.read();
+          RdataE = BTserial.read();
           if ( RdataE == '0') {
             strip.clear();
             strip.setBrightness(255);
@@ -545,7 +548,7 @@ class Effects
             strip.setBrightness(actBrightness);
             strip.show();
           }
-          RdataE = Serial.read();
+          RdataE = BTserial.read();
           if ( RdataE == '0') {
             strip.setBrightness(255);
             return;
@@ -564,12 +567,12 @@ class Effects
     //Random cycle
     void colorCycle() {
       while (1) {
-        Serial.println("CYCLE");
+        Serial.println("CYCLE"); BTserial.print("CYCLE"); BTserial.print(";");
         setColor();
         for (int actled = 0; actled < NUM_LEDS; actled++) {
           strip.setPixelColor(actled, strip.Color(red, green, blue));
           strip.show();
-          RdataE = Serial.read();
+          RdataE = BTserial.read();
           if ( RdataE == '0') {
             strip.clear();
             return;
@@ -583,34 +586,34 @@ class Effects
       while ( 1 ) {
         red = 0; green = 0; blue = 0;
         int brightness = 0;
-        Serial.print("red: ");
+        Serial.print("red: "); BTserial.print("Red: "); BTserial.print(";");
         while (red == 0) {
-          red = Serial.parseInt();
+          red = BTserial.parseInt();
         }
-        Serial.println(red);
+        Serial.println(red); BTserial.print(red); BTserial.print(";");
         if ( red < 0) {
           return;
         }
-        Serial.print("green: ");
+        Serial.print("green: "); BTserial.print("Green"); BTserial.print(";");
         while (green == 0) {
-          green = Serial.parseInt();
+          green = BTserial.parseInt();
         }
-        Serial.println(green);
-        Serial.print("blue: ");
+        Serial.println(green); BTserial.print(green); BTserial.print(";");
+        Serial.print("blue: "); BTserial.print("Blue: "); BTserial.print(";");
         while (blue == 0) {
-          blue = Serial.parseInt();
+          blue = BTserial.parseInt();
         }
-        Serial.println(blue);
-        Serial.print("brightness: ");
+        Serial.println(blue); BTserial.print(blue); BTserial.print(";");
+        Serial.print("brightness: "); BTserial.print("Brightness: "); BTserial.print(";");
         while (brightness == 0) {
-          brightness = Serial.parseInt();
+          brightness = BTserial.parseInt();
         }
         for (int actLed = 0; actLed < NUM_LEDS; actLed ++) {
           strip.setPixelColor(actLed, strip.Color(red, green, blue));
           strip.setBrightness(brightness);
           strip.show();
         }
-        Serial.println(brightness);
+        Serial.println(brightness); BTserial.print(brightness); BTserial.print(";");
       }
     }
 
