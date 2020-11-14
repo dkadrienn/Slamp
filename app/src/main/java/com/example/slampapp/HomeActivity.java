@@ -18,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         switchCompat = findViewById(R.id.mySwitch);
-        imageView = findViewById(R.id.myimageView);
+     /*   imageView = findViewById(R.id.myimageView);
 
         imageView.setImageDrawable(getResources().getDrawable(R.drawable.off));
 
@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
                     imageView.setImageDrawable(getResources().getDrawable(R.drawable.off));
                 }
             }
-        });
+        });*/
 
 
 
