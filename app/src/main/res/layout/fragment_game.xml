@@ -7,17 +7,163 @@
     android:background="@drawable/bg"
     tools:context=".ui.game.GameFragment">
 
-   <!-- <TextView
-        android:id="@+id/text_gallery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" /> -->
+   <TextView
+       android:id="@+id/textView4"
+       android:layout_width="422dp"
+       android:layout_height="42dp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+   <Button
+       android:id="@+id/timerButton"
+       android:layout_width="110dp"
+       android:layout_height="50dp"
+       android:text="OK"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.85"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/button13"
+       app:layout_constraintVertical_bias="0.100000024" />
+
+   <EditText
+       android:id="@+id/timerValueEditText"
+       android:layout_width="160dp"
+       android:layout_height="50dp"
+       android:ems="10"
+       android:hint="Timer's value    "
+       android:inputType="number"
+       android:textColor="#FFFFFF"
+       android:textColorHint="#AF8C8C"
+       android:textIsSelectable="false"
+       android:textSize="24sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.199"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/numberOfPlayersEditText"
+       app:layout_constraintVertical_bias="0.100000024"
+       tools:inputType="number" />
+
+   <EditText
+       android:id="@+id/numberOfPlayersEditText"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:ems="8"
+       android:hint="Number of players"
+       android:inputType="number"
+       android:textColor="#FFFFFF"
+       android:textColorHighlight="#FFFFFF"
+       android:textColorHint="#AF8C8C"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.114"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textView4"
+       app:layout_constraintVertical_bias="0.079"
+       tools:textSize="20sp" />
+
+   <Button
+       android:id="@+id/button13"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Start"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.808"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textView4"
+       app:layout_constraintVertical_bias="0.079" />
+
+   <Button
+       android:id="@+id/exitButton"
+       android:layout_width="127dp"
+       android:layout_height="49dp"
+       android:text="Exit"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.841"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textView4"
+       app:layout_constraintVertical_bias="0.918"
+       tools:textSize="24sp" />
+
+   <ImageButton
+       android:id="@+id/skipButton"
+       android:layout_width="110dp"
+       android:layout_height="110dp"
+       android:src="@drawable/no"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toStartOf="@+id/rollAgainButton"
+       app:layout_constraintStart_toEndOf="@+id/rollButton"
+       app:layout_constraintTop_toBottomOf="@+id/timerValueEditText"
+       app:layout_constraintVertical_bias="0.25" />
+
+   <ImageButton
+       android:id="@+id/rollAgainButton"
+       android:layout_width="110dp"
+       android:layout_height="110dp"
+       android:src="@drawable/dice6"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.95"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/timerValueEditText"
+       app:layout_constraintVertical_bias="0.25" />
+
+   <ImageButton
+       android:id="@+id/rollButton"
+       android:layout_width="110dp"
+       android:layout_height="110dp"
+       android:src="@drawable/dice"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.05"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/timerValueEditText"
+       app:layout_constraintVertical_bias="0.25" />
+
+   <TextView
+       android:id="@+id/rollDiceTextView"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Roll"
+       android:textColor="#FFFFFF"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.156"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/rollButton"
+       app:layout_constraintVertical_bias="0.0"
+       tools:textSize="20sp" />
+
+   <TextView
+       android:id="@+id/skipTextView"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Skip"
+       android:textColor="#FFFFFF"
+       android:textSize="20sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.5"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/skipButton"
+       app:layout_constraintVertical_bias="0.0" />
+
+   <TextView
+       android:id="@+id/rollAgainTextView"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Roll again"
+       android:textColor="#FFFFFF"
+       android:textSize="20sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.925"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/rollAgainButton"
+       app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
