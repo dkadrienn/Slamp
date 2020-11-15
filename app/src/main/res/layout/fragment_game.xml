@@ -130,13 +130,13 @@
        android:layout_height="wrap_content"
        android:text="Roll"
        android:textColor="#FFFFFF"
+       android:textSize="20sp"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintHorizontal_bias="0.156"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toBottomOf="@+id/rollButton"
-       app:layout_constraintVertical_bias="0.0"
-       tools:textSize="20sp" />
+       app:layout_constraintVertical_bias="0.0" />
 
    <TextView
        android:id="@+id/skipTextView"
