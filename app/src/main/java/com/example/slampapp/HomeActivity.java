@@ -17,23 +17,5 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        switchCompat = findViewById(R.id.mySwitch);
-     /*   imageView = findViewById(R.id.myimageView);
-
-        imageView.setImageDrawable(getResources().getDrawable(R.drawable.off));
-
-        switchCompat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(switchCompat.isChecked()){
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.on));
-                } else {
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.off));
-                }
-            }
-        });*/
-
-
-
     }
 }

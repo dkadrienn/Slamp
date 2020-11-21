@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,"Let's play",Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_colors:
-                        Toast.makeText(MainActivity.this,"Pick your favorite color",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this,"Pick color inside the circle",Toast.LENGTH_LONG).show();
                         break;
                 }
 
