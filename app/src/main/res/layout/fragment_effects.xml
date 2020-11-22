@@ -9,7 +9,7 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/discoBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -17,13 +17,13 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:text="Disco"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/cycleBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/xmasBtn"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/xmasBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -31,13 +31,13 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:text="Xmas"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/rainBtn"
+        app:layout_constraintEnd_toStartOf="@+id/discoBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/rainBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -45,13 +45,13 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:text="Rain"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/snowyBtn"
+        app:layout_constraintEnd_toStartOf="@+id/cycleBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/xmasBtn" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/cycleBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -59,13 +59,13 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:text="Cycle"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintBottom_toTopOf="@+id/rainbowBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintStart_toEndOf="@+id/rainBtn"
+        app:layout_constraintTop_toBottomOf="@+id/discoBtn" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/snowyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -73,13 +73,13 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:text="Snowy"
-        app:layout_constraintBottom_toTopOf="@+id/button8"
-        app:layout_constraintEnd_toStartOf="@+id/button6"
+        app:layout_constraintBottom_toTopOf="@+id/randomBtn"
+        app:layout_constraintEnd_toStartOf="@+id/rainbowBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/rainBtn" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/rainbowBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -87,13 +87,13 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:text="Rainbow"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintBottom_toTopOf="@+id/hourglassBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintStart_toEndOf="@+id/snowyBtn"
+        app:layout_constraintTop_toBottomOf="@+id/cycleBtn" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/hourglassBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -101,13 +101,13 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:text="Hourglass"
-        app:layout_constraintBottom_toTopOf="@+id/button10"
+        app:layout_constraintBottom_toTopOf="@+id/romanticBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button8"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintStart_toEndOf="@+id/randomBtn"
+        app:layout_constraintTop_toBottomOf="@+id/rainbowBtn" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/randomBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -115,13 +115,13 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:text="Random"
-        app:layout_constraintBottom_toTopOf="@+id/button9"
-        app:layout_constraintEnd_toStartOf="@+id/button7"
+        app:layout_constraintBottom_toTopOf="@+id/fireplaceBtn"
+        app:layout_constraintEnd_toStartOf="@+id/hourglassBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/snowyBtn" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/fireplaceBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -130,12 +130,12 @@
         android:layout_marginRight="40dp"
         android:text="Fireplace"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button10"
+        app:layout_constraintEnd_toStartOf="@+id/romanticBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button8" />
+        app:layout_constraintTop_toBottomOf="@+id/randomBtn" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/romanticBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -145,8 +145,8 @@
         android:text="Romantic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button9"
-        app:layout_constraintTop_toBottomOf="@+id/button7" />
+        app:layout_constraintStart_toEndOf="@+id/fireplaceBtn"
+        app:layout_constraintTop_toBottomOf="@+id/hourglassBtn" />
 
     <TextView
         android:id="@+id/textView"
