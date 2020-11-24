@@ -27,14 +27,9 @@ public class EffectsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         effectsViewModel = new ViewModelProvider(this).get(EffectsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_effects, container, false);
-      /*  final TextView textView = root.findViewById(R.id.text_home);
-        effectsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
-        GlobalClass globalClass = (GlobalClass) this.getActivity().getApplicationContext();
+
+        GlobalClass globalClass = (GlobalClass) getActivity().getApplicationContext();
+        BluetoothSocket btSocket = globalClass.getBtSocket();
         Button xmasBtn = (Button) root.findViewById(R.id.xmasBtn);
         Button discoBtn = (Button) root.findViewById(R.id.discoBtn);
         Button rainBtn = (Button) root.findViewById(R.id.rainBtn);
@@ -50,8 +45,8 @@ public class EffectsFragment extends Fragment {
         xmasBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothSocket btSocket = globalClass.getBtSocket();
-                chooseEffect(btSocket,98);
+                globalClass.chooseAction(btSocket,48);
+                globalClass.chooseAction(btSocket,98);
             }
         });
 
@@ -59,8 +54,8 @@ public class EffectsFragment extends Fragment {
         discoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothSocket btSocket = globalClass.getBtSocket();
-                chooseEffect(btSocket,97);
+                globalClass.chooseAction(btSocket,48);
+                globalClass.chooseAction(btSocket,97);
             }
         });
 
@@ -68,8 +63,8 @@ public class EffectsFragment extends Fragment {
         rainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothSocket btSocket = globalClass.getBtSocket();
-                chooseEffect(btSocket,99);
+                globalClass.chooseAction(btSocket,48);
+                globalClass.chooseAction(btSocket,99);
             }
         });
 
@@ -77,8 +72,8 @@ public class EffectsFragment extends Fragment {
         cycleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothSocket btSocket = globalClass.getBtSocket();
-                chooseEffect(btSocket,106);
+                globalClass.chooseAction(btSocket,48);
+                globalClass.chooseAction(btSocket,106);
             }
         });
 
@@ -86,8 +81,8 @@ public class EffectsFragment extends Fragment {
         snowyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothSocket btSocket = globalClass.getBtSocket();
-                chooseEffect(btSocket,104);
+                globalClass.chooseAction(btSocket,48);
+                globalClass.chooseAction(btSocket,104);
             }
         });
 
@@ -95,8 +90,8 @@ public class EffectsFragment extends Fragment {
         rainbowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothSocket btSocket = globalClass.getBtSocket();
-                chooseEffect(btSocket,102);
+                globalClass.chooseAction(btSocket,48);
+                globalClass.chooseAction(btSocket,102);
             }
         });
 
@@ -104,8 +99,8 @@ public class EffectsFragment extends Fragment {
         randomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothSocket btSocket = globalClass.getBtSocket();
-                chooseEffect(btSocket,105);
+                globalClass.chooseAction(btSocket,48);
+                globalClass.chooseAction(btSocket,105);
             }
         });
 
@@ -113,8 +108,8 @@ public class EffectsFragment extends Fragment {
         hourglassBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothSocket btSocket = globalClass.getBtSocket();
-                chooseEffect(btSocket,103);
+                globalClass.chooseAction(btSocket,48);
+                globalClass.chooseAction(btSocket,103);
             }
         });
 
@@ -122,8 +117,8 @@ public class EffectsFragment extends Fragment {
         fireplaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothSocket btSocket = globalClass.getBtSocket();
-                chooseEffect(btSocket,100);
+                globalClass.chooseAction(btSocket,48);
+                globalClass.chooseAction(btSocket,100);
             }
         });
 
@@ -131,24 +126,12 @@ public class EffectsFragment extends Fragment {
         romanticBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BluetoothSocket btSocket = globalClass.getBtSocket();
-                chooseEffect(btSocket,101);
+                globalClass.chooseAction(btSocket,48);
+                globalClass.chooseAction(btSocket,101);
             }
         });
-
 
         return root;
     }
 
-    void chooseEffect(BluetoothSocket btSocket, int effectIdentification){
-        if ( btSocket != null) {
-            try {
-                OutputStream outputStream = btSocket.getOutputStream();
-                outputStream.write(48);
-                outputStream.write(effectIdentification);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

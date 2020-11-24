@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,14 +38,20 @@ public class ColorsFragment extends Fragment {
                 new ViewModelProvider(this).get(ColorsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_color, container, false);
 
-            mimageView = root.findViewById(R.id.colorWheel);
-            mResult = root.findViewById(R.id.result);
-            mColorView = root.findViewById(R.id.colorView);
+        mimageView = root.findViewById(R.id.colorWheel);
+        mResult = root.findViewById(R.id.result);
+        mColorView = root.findViewById(R.id.colorView);
+        Button colorBtn = root.findViewById(R.id.colorBtn);
+        SeekBar brightnessSeekBar = root.findViewById(R.id.brightnessSeekBar);
 
-            mimageView.setDrawingCacheEnabled(true);
-            mimageView.buildDrawingCache(true);
+        mimageView.setDrawingCacheEnabled(true);
+        mimageView.buildDrawingCache(true);
 
-            //erintesre erzekelje a szineket
+        final int[] r = new int[1];
+        final int[] g = new int[1];
+        final int[] b = new int[1];
+
+        //erintesre erzekelje a szineket
             mimageView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -57,22 +65,30 @@ public class ColorsFragment extends Fragment {
                         }
 
                         //RGB
-                        int r = Color.red(pixel);
-                        int g = Color.green(pixel);
-                        int b = Color.blue(pixel);
+                        r[0] = Color.red(pixel);
+                        g[0] = Color.green(pixel);
+                        b[0] = Color.blue(pixel);
 
                         //HEX
                         String hex = "#" + Integer.toHexString(pixel);
 
                         //hattercsere a kivalasztott szinnek megfeleloen
-                        mColorView.setBackgroundColor(Color.rgb(r,g,b));
+                        mColorView.setBackgroundColor(Color.rgb(r[0], g[0], b[0]));
 
                         //kiiras
-                        mResult.setText("RGB: " + r +", " + g + ", " + b + ", " + "\nHEX: " + hex);
+                        mResult.setText("RGB: " + r[0] +", " + g[0] + ", " + b[0] + ", " + "\nHEX: " + hex);
                     }
                     return true;
                 }
             });
+
+            colorBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println(r[0] +", " + g[0] + ", " + b[0]);
+                }
+            });
+
         return root;
     }
 
