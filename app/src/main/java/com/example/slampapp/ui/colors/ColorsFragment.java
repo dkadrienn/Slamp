@@ -43,6 +43,7 @@ public class ColorsFragment extends Fragment {
         mColorView = root.findViewById(R.id.colorView);
         Button colorBtn = root.findViewById(R.id.colorBtn);
         SeekBar brightnessSeekBar = root.findViewById(R.id.brightnessSeekBar);
+        brightnessSeekBar.setMax(255);
 
         mimageView.setDrawingCacheEnabled(true);
         mimageView.buildDrawingCache(true);
@@ -52,8 +53,8 @@ public class ColorsFragment extends Fragment {
         final int[] b = new int[1];
 
         //erintesre erzekelje a szineket
-            mimageView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
+        mimageView.setOnTouchListener(new View.OnTouchListener() {
+                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
 
                     if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE){
@@ -85,7 +86,7 @@ public class ColorsFragment extends Fragment {
             colorBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println(r[0] +", " + g[0] + ", " + b[0]);
+                    System.out.println(r[0] +", " + g[0] + ", " + b[0] + ", " + brightnessSeekBar.getProgress());
                 }
             });
 
