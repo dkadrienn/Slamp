@@ -100,7 +100,7 @@ public class GameFragment extends Fragment {
         exitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                globalClass.chooseAction(btSocket, 48); // '0' karakter kuldese -> kimaradas
+                globalClass.chooseAction(btSocket, 48); // '0' karakter kuldese -> kilepes
             }
         });
 
