@@ -51,7 +51,13 @@ public class GameFragment extends Fragment {
                 globalClass.chooseAction(btSocket, 48); // '0' karakter kuldese az elozo effekt befejezese vegett
                 globalClass.chooseAction(btSocket, 107); // 'k' karakter kuldese -> dice effekt elinditas
                 String numberOfPlayersString = numberOfPlayersEditText.getText().toString(); // A jatekosok szamanak kiolvasasa
-                globalClass.writeNumber(btSocket, numberOfPlayersString); // A jatekosok szamanak elkuldese
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        // Actions to do after 10 seconds
+                        globalClass.writeNumber(btSocket, numberOfPlayersString); // A jatekosok szamanak elkuldese
+                    }
+                }, 500);
             }
         });
 
@@ -60,7 +66,13 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 globalClass.chooseAction(btSocket, 108); //'l' karakter kuldese -> timer effekt inditasa
                 String timersValueString = timersValueTextEdit.getText().toString(); // timer ertekenek kiolvasasa
-                globalClass.writeNumber(btSocket, timersValueString); // A timer ertekenek az elkuldese
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        // Actions to do after 10 seconds
+                        globalClass.writeNumber(btSocket, timersValueString); // A timer ertekenek az elkuldese
+                    }
+                }, 500);
             }
         });
 

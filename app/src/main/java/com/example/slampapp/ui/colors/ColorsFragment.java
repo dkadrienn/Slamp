@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.example.slampapp.R;
 
 public class ColorsFragment extends Fragment {
 
+    //Színkiválasztáshoz
     private ColorsViewModel colorsViewModel;
 
     ImageView mimageView;
@@ -31,6 +33,9 @@ public class ColorsFragment extends Fragment {
 
     Bitmap bitmap;
 
+    //Seekbarhoz
+    private static SeekBar seek_Bar;
+    private static TextView text_View;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,8 +46,11 @@ public class ColorsFragment extends Fragment {
         mimageView = root.findViewById(R.id.colorWheel);
         mResult = root.findViewById(R.id.result);
         mColorView = root.findViewById(R.id.colorView);
+
         Button colorBtn = root.findViewById(R.id.colorBtn);
-        SeekBar brightnessSeekBar = root.findViewById(R.id.brightnessSeekBar);
+
+        SeekBar brightnessSeekBar = (SeekBar) root.findViewById(R.id.brightnessSeekBar);
+        TextView brightnesstextView = (TextView) root.findViewById(R.id.textViewForBright);
 
         mimageView.setDrawingCacheEnabled(true);
         mimageView.buildDrawingCache(true);
@@ -82,10 +90,31 @@ public class ColorsFragment extends Fragment {
                 }
             });
 
+            //bluetoothnak
             colorBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     System.out.println(r[0] +", " + g[0] + ", " + b[0]);
+                }
+            });
+
+            //seekBarn-nak
+            brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                int progressValue = 0;
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    progressValue = progress;
+                    brightnesstextView.setText("Brightness: " + progressValue);
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
                 }
             });
 

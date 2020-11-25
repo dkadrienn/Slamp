@@ -34,7 +34,17 @@
     <SeekBar
         android:id="@+id/brightnessSeekBar"
         android:layout_width="match_parent"
-        android:layout_height="44dp" />
+        android:layout_height="44dp"
+        android:max="255"
+        android:min="20"/>
+
+    <TextView
+        android:id="@+id/textViewForBright"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="155dp"
+        android:layout_marginLeft="145dp"
+        android:text="Brightness: " />
 
     <Button
         android:id="@+id/colorBtn"
