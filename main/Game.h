@@ -43,8 +43,7 @@ class Game
       if  (block == 1) { // A jatekosok szamanak beolvasasa
         while (numberOfPlayers < 0) {
           delay(100);
-          numberOfPlayersChar = BTserial.read();
-          numberOfPlayers = numberOfPlayersChar - '0';
+          numberOfPlayers = BTserial.parseInt();
         }
 
         Serial.println(numberOfPlayers); BTserial.print(numberOfPlayers); BTserial.print(";");
@@ -74,7 +73,7 @@ class Game
             actFigure ++;
           }
         }
-        else if (Game_Rdata == '0') { //Kimarad egy korbol ha zeros-t olvas
+        else if (Game_Rdata == '2') { //Kimarad egy korbol ha zeros-t olvas
           Serial.print(actFigure + 1); BTserial.print(actFigure + 1); BTserial.print(";");
           Serial.println(". kimarad"); BTserial.print(". kimarad"); BTserial.print(";");
           if ( actFigure == numberOfPlayers - 1 ) {
@@ -87,7 +86,7 @@ class Game
         else if (Game_Rdata == 'l'){
           timer(); 
         }
-        else if (Game_Rdata == '2') {
+        else if (Game_Rdata == '0') {
           Serial.println("KILEPES"); BTserial.print("KILEPES"); BTserial.print(";");
           block ++;
           return;
