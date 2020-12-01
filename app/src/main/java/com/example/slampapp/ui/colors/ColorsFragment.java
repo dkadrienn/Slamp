@@ -1,8 +1,10 @@
 package com.example.slampapp.ui.colors;
 
+import android.bluetooth.BluetoothSocket;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.slampapp.GlobalClass;
 import com.example.slampapp.R;
 
 public class ColorsFragment extends Fragment {
@@ -28,7 +31,10 @@ public class ColorsFragment extends Fragment {
     private ColorsViewModel colorsViewModel;
 
     ImageView mimageView;
-    TextView mResult;
+    TextView mResultR;
+    TextView mResultG;
+    TextView mResultB;
+    TextView mBrightness;
     View mColorView;
 
     Bitmap bitmap;
@@ -44,13 +50,18 @@ public class ColorsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_color, container, false);
 
         mimageView = root.findViewById(R.id.colorWheel);
-        mResult = root.findViewById(R.id.result);
+        mResultR = root.findViewById(R.id.resultR);
+        mResultG = root.findViewById(R.id.resultG);
+        mResultB = root.findViewById(R.id.resultB);
         mColorView = root.findViewById(R.id.colorView);
 
         Button colorBtn = root.findViewById(R.id.colorBtn);
 
         SeekBar brightnessSeekBar = (SeekBar) root.findViewById(R.id.brightnessSeekBar);
         TextView brightnesstextView = (TextView) root.findViewById(R.id.textViewForBright);
+
+        GlobalClass globalClass = (GlobalClass) getActivity().getApplicationContext();
+        BluetoothSocket btSocket = globalClass.getBtSocket();
 
 
         mimageView.setDrawingCacheEnabled(true);
@@ -78,24 +89,15 @@ public class ColorsFragment extends Fragment {
                         g[0] = Color.green(pixel);
                         b[0] = Color.blue(pixel);
 
-                        //HEX
-                        String hex = "#" + Integer.toHexString(pixel);
-
                         //hattercsere a kivalasztott szinnek megfeleloen
                         mColorView.setBackgroundColor(Color.rgb(r[0], g[0], b[0]));
 
                         //kiiras
-                        mResult.setText("RGB: " + r[0] +", " + g[0] + ", " + b[0] + ", " + "\nHEX: " + hex);
+                        mResultR.setText("R " + r[0]);
+                        mResultG.setText("G " + g[0]);
+                        mResultB.setText("B " + b[0]);
                     }
                     return true;
-                }
-            });
-
-            //bluetoothnak
-            colorBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    System.out.println(r[0] +", " + g[0] + ", " + b[0] + ", " + brightnessSeekBar.getProgress());
                 }
             });
 
@@ -116,6 +118,45 @@ public class ColorsFragment extends Fragment {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
 
+                }
+            });
+
+            //OK gomb
+            colorBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String red = mResultR.getText().toString();
+                    String green = mResultG.getText().toString();
+                    String blue = mResultB.getText().toString();
+                    String brightness = mBrightness.getText().toString().substring("Brightness: ".length(), mBrightness.getText().toString().length()-1);
+                    Handler handler1 = new Handler();
+                    handler1.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 10 seconds
+                            globalClass.writeNumber(btSocket, red); // r komponens kuldese
+                        }
+                    }, 500);
+                    Handler handler2 = new Handler();
+                    handler2.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 10 seconds
+                            globalClass.writeNumber(btSocket, green); // g komponens kuldese
+                        }
+                    }, 500);
+                    Handler handler3 = new Handler();
+                    handler3.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 10 seconds
+                            globalClass.writeNumber(btSocket, blue); // b komponens kuldese
+                             }
+                    }, 500);
+                    Handler handler4 = new Handler();
+                    handler4.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 10 seconds
+                            globalClass.writeNumber(btSocket, brightness); // intenzitas kuldese
+                        }
+                    }, 500);
                 }
             });
 

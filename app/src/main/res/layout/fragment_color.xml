@@ -12,7 +12,7 @@
         android:id="@+id/colorWheel"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/colorwheel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,15 +21,31 @@
     <View
         android:id="@+id/colorView"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="75dp" />
 
     <TextView
-        android:id="@+id/result"
+        android:id="@+id/resultR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="HEX \nRGB "
+        android:text="R "
         android:textColor="#000"
         android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/resultG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="G "
+        android:textColor="#000"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/resultB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="B "
+        android:textColor="#000"
+        android:textSize="18sp"/>
 
     <SeekBar
         android:id="@+id/brightnessSeekBar"
