@@ -582,38 +582,36 @@ class Effects
       }
     }
 
+
     void myBRGB() {
       while ( 1 ) {
+        long int allInOne = 0;
         red = 0; green = 0; blue = 0;
         int brightness = 0;
-        Serial.print("red: "); BTserial.print("Red: "); BTserial.print(";");
-        while (red == 0) {
-          red = BTserial.parseInt();
+        while (brightness == 0) {
+          allInOne = BTserial.parseInt();
+          if ( allInOne != 0 ) {
+            brightness = BTserial.parseInt();
+          }
         }
-        Serial.println(red); BTserial.print(red); BTserial.print(";");
-        if ( red < 0) {
+        Serial.println(allInOne);
+         if ( allInOne < 0 ) {
           return;
         }
-        Serial.print("green: "); BTserial.print("Green"); BTserial.print(";");
-        while (green == 0) {
-          green = BTserial.parseInt();
-        }
-        Serial.println(green); BTserial.print(green); BTserial.print(";");
-        Serial.print("blue: "); BTserial.print("Blue: "); BTserial.print(";");
-        while (blue == 0) {
-          blue = BTserial.parseInt();
-        }
-        Serial.println(blue); BTserial.print(blue); BTserial.print(";");
-        Serial.print("brightness: "); BTserial.print("Brightness: "); BTserial.print(";");
-        while (brightness == 0) {
-          brightness = BTserial.parseInt();
-        }
+        blue = allInOne % 1000;
+        allInOne /= 1000;
+        green = allInOne % 1000;
+        allInOne /= 1000;
+        red = allInOne;
+        Serial.println(red); //BTserial.print(red); BTserial.print(";");
+        Serial.println(green);
+        Serial.println(blue);
+        Serial.println(brightness);
         for (int actLed = 0; actLed < NUM_LEDS; actLed ++) {
           strip.setPixelColor(actLed, strip.Color(red, green, blue));
           strip.setBrightness(brightness);
           strip.show();
         }
-        Serial.println(brightness); BTserial.print(brightness); BTserial.print(";");
       }
     }
 
