@@ -27,5 +27,9 @@
         android:id="@+id/nav_colors"
         android:name="com.example.slampapp.ui.colors.ColorsFragment"
         android:label="@string/menu_colors"
-        tools:layout="@layout/fragment_color" />
+        tools:layout="@layout/fragment_color" >
+        <action
+            android:id="@+id/action_nav_colors_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 </navigation>

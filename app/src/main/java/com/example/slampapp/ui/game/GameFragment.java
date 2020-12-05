@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.slampapp.GlobalClass;
 import com.example.slampapp.R;
@@ -44,6 +45,7 @@ public class GameFragment extends Fragment {
         ImageButton rollBtn = (ImageButton) root.findViewById(R.id.rollBtn);
         ImageButton skipBtn = (ImageButton) root.findViewById(R.id.skipBtn);
         ImageButton rollAgainBtn = (ImageButton) root.findViewById(R.id.rollAgainBtn);
+        globalClass.chooseAction(btSocket, 48);
 
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override

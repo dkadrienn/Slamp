@@ -1,11 +1,14 @@
 package com.example.slampapp.ui.effects;
 
 import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +22,8 @@ import com.example.slampapp.R;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class EffectsFragment extends Fragment {
 
@@ -40,6 +45,8 @@ public class EffectsFragment extends Fragment {
         Button hourglassBtn = (Button) root.findViewById(R.id.hourglassBtn);
         Button fireplaceBtn = (Button) root.findViewById(R.id.fireplaceBtn);
         Button romanticBtn = (Button) root.findViewById(R.id.romanticBtn);
+        ImageButton voiceImageBtn = (ImageButton) root.findViewById(R.id.voiceImageBtn);
+        globalClass.chooseAction(btSocket, 48);
 
         //Christmas effect
         xmasBtn.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +138,56 @@ public class EffectsFragment extends Fragment {
             }
         });
 
+        voiceImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                globalClass.chooseAction(btSocket,48);
+               voiceAutomation();
+            }
+        });
+
         return root;
     }
 
+    private void voiceAutomation(){
+        Intent voice = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        voice.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        voice.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        voice.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now..");
+            startActivityForResult(voice , 1);
+        }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        GlobalClass globalClass = (GlobalClass) getActivity().getApplicationContext();
+        BluetoothSocket btSocket = globalClass.getBtSocket();
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && data != null ){
+            ArrayList<String> arrayList = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            System.out.println(arrayList.get(0));
+            switch (arrayList.get(0).toString()){
+                case "disco":
+                    globalClass.chooseAction(btSocket,97); break;
+                case "christmas":
+                    globalClass.chooseAction(btSocket,98); break;
+                case "rain":
+                    globalClass.chooseAction(btSocket,106); break;
+                case "snowy":
+                    globalClass.chooseAction(btSocket,104); break;
+                case "rainbow":
+                    globalClass.chooseAction(btSocket,102); break;
+                case "random":
+                    globalClass.chooseAction(btSocket,105); break;
+                case "hourglass":
+                    globalClass.chooseAction(btSocket,103); break;
+                case "fireplace":
+                    globalClass.chooseAction(btSocket,100); break;
+                case "romantic":
+                    globalClass.chooseAction(btSocket,101); break;
+                default:
+                    globalClass.chooseAction(btSocket,48);
+                    break;
+            }
+        }
+    }
 }

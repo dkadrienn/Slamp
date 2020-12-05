@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:max="255"
-        android:min="20"/>
+        android:min="1"/>
 
     <TextView
         android:id="@+id/textViewForBright"
@@ -69,6 +69,13 @@
         android:layout_marginStart="125dp"
         android:layout_marginLeft="125dp"
         android:text="OK" />
+
+    <Button
+        android:id="@+id/finishBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginLeft="300dp"
+        android:text="Exit" />
 
 
 </LinearLayout>

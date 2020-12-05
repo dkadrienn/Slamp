@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.slampapp.GlobalClass;
 import com.example.slampapp.R;
@@ -56,13 +57,16 @@ public class ColorsFragment extends Fragment {
         mColorView = root.findViewById(R.id.colorView);
 
         Button colorBtn = root.findViewById(R.id.colorBtn);
+        Button finishBtn = root.findViewById(R.id.finishBtn);
 
         SeekBar brightnessSeekBar = (SeekBar) root.findViewById(R.id.brightnessSeekBar);
-        TextView brightnesstextView = (TextView) root.findViewById(R.id.textViewForBright);
+        TextView brightnessTextView = (TextView) root.findViewById(R.id.textViewForBright);
 
         GlobalClass globalClass = (GlobalClass) getActivity().getApplicationContext();
         BluetoothSocket btSocket = globalClass.getBtSocket();
 
+        globalClass.chooseAction(btSocket,48); // 0 kuldese
+        globalClass.chooseAction(btSocket,109); // szinvalasztas effekt inditasa
 
         mimageView.setDrawingCacheEnabled(true);
         mimageView.buildDrawingCache(true);
@@ -75,13 +79,15 @@ public class ColorsFragment extends Fragment {
         mimageView.setOnTouchListener(new View.OnTouchListener() {
                  @Override
                 public boolean onTouch(View v, MotionEvent event) {
-
                     if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE){
                         bitmap = mimageView.getDrawingCache();
-                        int pixel = bitmap.getPixel((int)event.getX(), (int)event.getY());
-                        if((int)event.getX() > mimageView.getMaxWidth() || (int)event.getY() > mimageView.getMaxHeight())
+                        int pixel;
+                        if((int)event.getY() >= bitmap.getHeight() || (int)event.getY() < 0)
                         {
                             pixel = bitmap.getPixel(0, 0);
+                        }
+                        else{
+                            pixel = bitmap.getPixel((int)event.getX(), (int)event.getY());
                         }
 
                         //RGB
@@ -93,9 +99,9 @@ public class ColorsFragment extends Fragment {
                         mColorView.setBackgroundColor(Color.rgb(r[0], g[0], b[0]));
 
                         //kiiras
-                        mResultR.setText("R " + r[0]);
-                        mResultG.setText("G " + g[0]);
-                        mResultB.setText("B " + b[0]);
+                        mResultR.setText("R: " + r[0]);
+                        mResultG.setText("G: " + g[0]);
+                        mResultB.setText("B: " + b[0]);
                     }
                     return true;
                 }
@@ -107,7 +113,7 @@ public class ColorsFragment extends Fragment {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                     progressValue = progress;
-                    brightnesstextView.setText("Brightness: " + progressValue);
+                    brightnessTextView.setText("Brightness: " + progressValue);
                 }
 
                 @Override
@@ -125,38 +131,24 @@ public class ColorsFragment extends Fragment {
             colorBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String red = mResultR.getText().toString();
-                    String green = mResultG.getText().toString();
-                    String blue = mResultB.getText().toString();
-                    String brightness = mBrightness.getText().toString().substring("Brightness: ".length(), mBrightness.getText().toString().length()-1);
-                    Handler handler1 = new Handler();
-                    handler1.postDelayed(new Runnable() {
-                        public void run() {
-                            // Actions to do after 10 seconds
-                            globalClass.writeNumber(btSocket, red); // r komponens kuldese
-                        }
-                    }, 500);
-                    Handler handler2 = new Handler();
-                    handler2.postDelayed(new Runnable() {
-                        public void run() {
-                            // Actions to do after 10 seconds
-                            globalClass.writeNumber(btSocket, green); // g komponens kuldese
-                        }
-                    }, 500);
-                    Handler handler3 = new Handler();
-                    handler3.postDelayed(new Runnable() {
-                        public void run() {
-                            // Actions to do after 10 seconds
-                            globalClass.writeNumber(btSocket, blue); // b komponens kuldese
-                             }
-                    }, 500);
-                    Handler handler4 = new Handler();
-                    handler4.postDelayed(new Runnable() {
-                        public void run() {
-                            // Actions to do after 10 seconds
-                            globalClass.writeNumber(btSocket, brightness); // intenzitas kuldese
-                        }
-                    }, 500);
+                    long allInOne = r[0]*1000000 + g[0]*1000 + b[0];
+                    System.out.println(allInOne);
+                    String brightness =  String.valueOf(brightnessSeekBar.getProgress());
+                    globalClass.writeNumber(btSocket, String.valueOf(allInOne));
+                    globalClass.chooseAction(btSocket, 0);
+                    globalClass.writeNumber(btSocket, brightness);
+
+                }
+            });
+
+            //Exit
+            finishBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    globalClass.writeNumber(btSocket, "-1");
+                    globalClass.chooseAction(btSocket, 0);
+                    globalClass.writeNumber(btSocket, "1");
+                    Navigation.findNavController(root).navigate(R.id.action_nav_colors_to_nav_home);
                 }
             });
 

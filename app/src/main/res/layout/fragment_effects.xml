@@ -30,7 +30,7 @@
         android:layout_marginLeft="80dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
-        android:text="Xmas"
+        android:text="Christmas"
         app:layout_constraintBottom_toTopOf="@+id/rainBtn"
         app:layout_constraintEnd_toStartOf="@+id/discoBtn"
         app:layout_constraintStart_toStartOf="parent"
