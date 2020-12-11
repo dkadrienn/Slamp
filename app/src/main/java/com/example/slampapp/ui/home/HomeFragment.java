@@ -34,24 +34,18 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         SwitchCompat mySwitch = root.findViewById(R.id.mySwitch);
         GlobalClass globalClass = (GlobalClass) getActivity().getApplicationContext();
-       // final TextView textView = root.findViewById(R.id.text_home);
-       /* homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) { textView.setText(s);
-            }
-        });*/
 
         mySwitch.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked == true){
+                if(isChecked == true){ //Parositott eszkozok listajanak megnyitasa
                     Intent startIntent = new Intent( getActivity().getApplicationContext(), ConnectionActivity.class);
                     startActivity(startIntent);
                 }
                 else{
                     BluetoothSocket btSocket = globalClass.getBtSocket();
                     try {
-                        btSocket.close();
+                        btSocket.close(); //Bluetooth kapcsolat megszakitasa
                         showToast("Disconnect");
                     } catch (IOException e) {
                         e.printStackTrace();

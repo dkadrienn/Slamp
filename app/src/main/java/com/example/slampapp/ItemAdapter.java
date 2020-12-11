@@ -12,9 +12,10 @@ import java.util.List;
 
 public class ItemAdapter extends BaseAdapter {
 
+
     LayoutInflater mInflater;
-    List<String> devicesName = new ArrayList<String>();
-    List<String> devicesId = new ArrayList<String>();
+    List<String> devicesName;
+    List<String> devicesId;
 
     public ItemAdapter(Context c, List<String> devicesName, List<String> devicesId){
         this.devicesName = devicesName;

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class GlobalClass extends Application {
-
+    // A bluetooth socket tarolasa es az adatok kuldeset megvalosito fuggvenyek
     private BluetoothSocket btSocket;
 
     public BluetoothSocket getBtSocket() {

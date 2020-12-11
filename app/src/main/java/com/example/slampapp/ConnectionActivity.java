@@ -26,8 +26,7 @@ public class ConnectionActivity extends AppCompatActivity {
     List<String> devicesName = new ArrayList<String>();
     List<String> devicesId = new ArrayList<String>();
     BluetoothAdapter bluetoothAdapter;
-    BluetoothSocket btSocket = null, btSockets;
-    int pos = -1;
+    BluetoothSocket btSocket = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +37,16 @@ public class ConnectionActivity extends AppCompatActivity {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         if (bluetoothAdapter.isEnabled()) {
-            Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
+            Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices(); //A parositott eszkozok lekerese
             for (BluetoothDevice device : devices) {
-                //System.out.println(device.getName().toString() + ": " +  device.toString());
                 devicesName.add(device.getName().toString());
                 devicesId.add(device.toString());
             }
         } else {
-            showToast("Turn on Bluetooth to get paired devices");
+            showToast("Turn on Bluetooth to get devices paired");
         }
 
-        Resources res = getResources();
         myListView = (ListView) findViewById(R.id.myListView);
-
 
         ItemAdapter itemAdapter = new ItemAdapter(this, devicesName, devicesId);
         myListView.setAdapter(itemAdapter);

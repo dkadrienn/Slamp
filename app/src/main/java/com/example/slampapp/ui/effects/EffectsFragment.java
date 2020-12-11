@@ -138,6 +138,7 @@ public class EffectsFragment extends Fragment {
             }
         });
 
+        //Hangvezerles inditasa
         voiceImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

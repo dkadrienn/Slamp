@@ -35,7 +35,6 @@ public class ColorsFragment extends Fragment {
     TextView mResultR;
     TextView mResultG;
     TextView mResultB;
-    TextView mBrightness;
     View mColorView;
 
     Bitmap bitmap;
@@ -51,6 +50,7 @@ public class ColorsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_color, container, false);
 
         mimageView = root.findViewById(R.id.colorWheel);
+        //Szineknek
         mResultR = root.findViewById(R.id.resultR);
         mResultG = root.findViewById(R.id.resultG);
         mResultB = root.findViewById(R.id.resultB);
@@ -59,9 +59,11 @@ public class ColorsFragment extends Fragment {
         Button colorBtn = root.findViewById(R.id.colorBtn);
         Button finishBtn = root.findViewById(R.id.finishBtn);
 
+        //Fenyero szabalyzo seekbar
         SeekBar brightnessSeekBar = (SeekBar) root.findViewById(R.id.brightnessSeekBar);
         TextView brightnessTextView = (TextView) root.findViewById(R.id.textViewForBright);
 
+        //Bluetooth socket tarolasa
         GlobalClass globalClass = (GlobalClass) getActivity().getApplicationContext();
         BluetoothSocket btSocket = globalClass.getBtSocket();
 
@@ -79,15 +81,16 @@ public class ColorsFragment extends Fragment {
         mimageView.setOnTouchListener(new View.OnTouchListener() {
                  @Override
                 public boolean onTouch(View v, MotionEvent event) {
+                     //Kattintasra vagy mozgo erintesre erzekel a kepernyo
                     if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE){
-                        bitmap = mimageView.getDrawingCache();
+                        bitmap = mimageView.getDrawingCache(); //Szinkort tartalmazo bitterkep
                         int pixel;
-                        if((int)event.getY() >= bitmap.getHeight() || (int)event.getY() < 0)
+                        if((int)event.getY() >= bitmap.getHeight() || (int)event.getY() < 0) //A keprol valo kilepest kezeli le
                         {
                             pixel = bitmap.getPixel(0, 0);
                         }
                         else{
-                            pixel = bitmap.getPixel((int)event.getX(), (int)event.getY());
+                            pixel = bitmap.getPixel((int)event.getX(), (int)event.getY()); // Az adott kelbeli pixel pozicioinak lekerese
                         }
 
                         //RGB
@@ -111,6 +114,7 @@ public class ColorsFragment extends Fragment {
             brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 int progressValue = 0;
                 @Override
+                //Csusztatassal valtozik az erteke
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                     progressValue = progress;
                     brightnessTextView.setText("Brightness: " + progressValue);
@@ -131,9 +135,10 @@ public class ColorsFragment extends Fragment {
             colorBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    long allInOne = r[0]*1000000 + g[0]*1000 + b[0];
-                    System.out.println(allInOne);
-                    String brightness =  String.valueOf(brightnessSeekBar.getProgress());
+                    long allInOne = r[0]*1000000 + g[0]*1000 + b[0]; // Az r, g, b komponensek osszeepitese egyetlen valtozoba
+                    //System.out.println(allInOne);
+                    String brightness =  String.valueOf(brightnessSeekBar.getProgress()); // A seekbar ertekenek lekerdezese String formatumban
+                    //Az ertkek elkuldese az Arduino-nak
                     globalClass.writeNumber(btSocket, String.valueOf(allInOne));
                     globalClass.chooseAction(btSocket, 0);
                     globalClass.writeNumber(btSocket, brightness);
@@ -145,9 +150,10 @@ public class ColorsFragment extends Fragment {
             finishBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // A Color funkcio befejezes es visszalepes a Home page-re
                     globalClass.writeNumber(btSocket, "-1");
                     globalClass.chooseAction(btSocket, 0);
-                    globalClass.writeNumber(btSocket, "1");
+                     globalClass.writeNumber(btSocket, "1");
                     Navigation.findNavController(root).navigate(R.id.action_nav_colors_to_nav_home);
                 }
             });
